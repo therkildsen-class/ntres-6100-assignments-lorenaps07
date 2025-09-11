@@ -6,3 +6,32 @@ cars
 ?cars
 
 View(mpg)
+
+head(cars, 4)
+tail(cars)
+
+#create a ggplot
+ggplot(data =mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) #layer aesthetics
+
+#good practices: keep all new layers in new lines
+
+#exercise 2
+ggplot(data =mpg) # does not make a plot because does not have layers
+
+ggplot(data =mpg) +
+  geom_point(mapping = aes(x = cyl, y = hwy)) #other way of displaying data
+
+ggplot(data =mpg) +
+  geom_point(mapping = aes(x = class, y = drv)) #not good way to display data because points overlap
+
+#add color, size and shape
+ggplot(data =mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = class, size = cyl), shape = 1)
+
+?geom_point #gives help and explanation
+
+#exercise 3, color points by the yr of manufacture for each car model
+ggplot(data =mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = year)
+
