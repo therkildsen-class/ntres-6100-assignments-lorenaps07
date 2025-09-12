@@ -21,3 +21,5 @@ Assignment#  |  Fully completed |  Partially completed  | Not completed |
 7  |    |    |    |  
 8  |    |    |    |  
 9  |    |    |    |  
+
+Assignment 2: https://github.com/lorenaps07/data-gnateater-research.git
