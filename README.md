@@ -23,4 +23,5 @@ Assignment#  |  Fully completed |  Partially completed  | Not completed |
 9  |    |    |    |  
 
 Assignment 2: https://github.com/lorenaps07/data-gnateater-research.git
+
 Assignment 3: https://lorenaps07.github.io/assignment-3-lp455/
