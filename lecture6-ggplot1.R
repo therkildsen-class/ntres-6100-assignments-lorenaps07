@@ -33,5 +33,20 @@ ggplot(data =mpg) +
 
 #exercise 3, color points by the yr of manufacture for each car model
 ggplot(data =mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, color = year)
+  geom_point(mapping = aes(x = displ, y = hwy, color = year))
 
+#put the main data default inside ggplot to use that for all next plots
+ggplot(data =mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point(mapping = aes(color = class, size = cyl), shape = 1) +
+  geom_smooth() +
+  facet_wrap(~ year, nrow = 2)
+
+#facet_wrap to divide by some variable, create subplots
+ggplot(data =mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point(mapping = aes(color = class, size = cyl)) +
+  facet_wrap(~ class)
+
+ggsave(filename = "plots/hmy_vs_displ.pdf", plot1)
+?ggsave
+create.dir = TRUE
+ggsave(filename = "plots/hmy_vs_displ.pdf")
