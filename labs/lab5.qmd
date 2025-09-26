@@ -28,6 +28,7 @@ notes <- read_csv("https://raw.githubusercontent.com/nt246/NTRES-6100-data-scien
 ```{r}
 nrow(titanic)
 ```
+
 ```{r}
 # number of passengers surviving vs. dying
 survived_count <- titanic |>
@@ -48,6 +49,7 @@ titanic |>
   geom_label(data = survived_count, aes(label=str_c(percentage, "%"), y=n/2)) +
   coord_flip()
 ```
+
 #Question 2. How many passengers on the Titanic were males and how many were females? What do you find when you break it down by ticket class?
 
 ```{r}
@@ -55,7 +57,8 @@ sex_count <- titanic |>
   count(Sex)
 kable(sex_count)
 ```
-``` {r}
+
+```{r}
 sex_by_class <- titanic |>
   group_by(Sex, Pclass) |>
   count()
