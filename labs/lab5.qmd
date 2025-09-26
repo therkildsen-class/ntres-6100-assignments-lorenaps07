@@ -1,0 +1,74 @@
+---
+title: "lab5"
+format: gfm
+---
+
+# Load required packages
+
+library(tidyverse) library(knitr)
+
+# Read in the data
+
+titanic \<- read_csv("https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/Titanic.csv")
+
+# Let's look at the top 5 lines of the dataset
+
+```{r}
+head(titanic, n = 5)
+kable()
+
+View(titanic)
+
+notes <- read_csv("https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/Notes.csv") kable(notes)
+
+```
+
+#Question 1: According to Wikipedia, there was an estimated 2,224 passengers and crew onboard the Titanic when it sank. How many of them do we have information for in this dataset? Of the people we have data for, how many of them survived and how many did not? What is the overall survival rate?
+
+```{r}
+nrow(titanic)
+```
+```{r}
+# number of passengers surviving vs. dying
+survived_count <- titanic |>
+  mutate(survived = ifelse(Survived==0, "no", "yes")) |>
+  count(survived) |>
+  mutate(percentage = round(n/nrow(titanic)*100,2))
+kable(survived_count)
+```
+
+#mutate creates new variable, count asks to list the variable selected
+
+```{r}
+# plotting
+titanic |>
+  mutate(survived = ifelse(Survived==0, "no", "yes")) |>
+  ggplot(aes(x = survived)) +
+  geom_bar(aes(fill = survived)) +
+  geom_label(data = survived_count, aes(label=str_c(percentage, "%"), y=n/2)) +
+  coord_flip()
+```
+#Question 2. How many passengers on the Titanic were males and how many were females? What do you find when you break it down by ticket class?
+
+```{r}
+sex_count <- titanic |>
+  count(Sex)
+kable(sex_count)
+```
+``` {r}
+sex_by_class <- titanic |>
+  group_by(Sex, Pclass) |>
+  count()
+kable(sex_by_class)
+## plot
+sex_by_class |> 
+  ggplot(aes(x = Sex, y = n)) +
+  geom_col(aes(fill = Sex)) +
+  geom_text(aes(label = n, y = n + 20)) +
+  facet_wrap(~Pclass) +
+  ylab("count") +
+  xlab("sex per class")
+
+#geom_text(aes(label)) add label, label = can select what to write, and y = n + 20 to give a 20 unit in terms of y on the graph, so labels are not inside the bars of the graph. facet_wrap('variable') will show more than one figure for the different content units in that selected variable, like 3 plots for each class type in Pclass. ylab is the code to writing something on the y label, same would be xlab for x.
+```
+
