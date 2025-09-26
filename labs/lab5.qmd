@@ -71,4 +71,3 @@ sex_by_class |>
 
 #geom_text(aes(label)) add label, label = can select what to write, and y = n + 20 to give a 20 unit in terms of y on the graph, so labels are not inside the bars of the graph. facet_wrap('variable') will show more than one figure for the different content units in that selected variable, like 3 plots for each class type in Pclass. ylab is the code to writing something on the y label, same would be xlab for x.
 ```
-

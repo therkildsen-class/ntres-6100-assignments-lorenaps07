@@ -1,6 +1,7 @@
 # lab5
 
 
+<<<<<<< HEAD
 # Load required packages
 
 library(tidyverse) library(knitr)
@@ -13,3 +14,5 @@ read_csv(“https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/mast
 # Let’s look at the top 5 lines of the dataset
 
 head(titanic, n = 5) \|\> kable()
+=======
+>>>>>>> 5677a46aa30c45fa34531fef014f204460425c48
