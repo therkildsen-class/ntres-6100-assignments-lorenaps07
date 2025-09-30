@@ -10,32 +10,20 @@ Please indicate if you are **taking this class for credit** or **auditing**:
 
 Please use the following table to grade the student's assignment:
 
-<<<<<<< HEAD
-| Assignment# | Fully completed | Partially completed | Not completed |
-|:-----------:|:---------------:|:-------------------:|:-------------:|
-|      1      |                 |                     |               |
-|      2      |                 |                     |               |
-|      3      |                 |                     |               |
-|      4      |                 |                     |               |
-|      5      |                 |                     |               |
-|      6      |                 |                     |               |
-|      7      |                 |                     |               |
-|      8      |                 |                     |               |
-|      9      |                 |                     |               |
-
-Assignment 2: <https://github.com/lorenaps07/data-gnateater-research.git>
-=======
-Assignment#  |  Fully completed |  Partially completed  | Not completed |
+| Assignment#  |  Fully completed |  Partially completed  | Not completed |
 | :--: | :--: | :--: | :--: |
 1  |  X  |    |    |  
 2  |  X  |    |    |  
 3  |  X  |    |    |  
-4  |    |    |    |  
+4  |    |    |  X  |  
 5  |    |    |    |  
 6  |    |    |    |  
 7  |    |    |    |  
 8  |    |    |    |  
 9  |    |    |    |  
+
+Assignment 2: <https://github.com/lorenaps07/data-gnateater-research.git>
+
 
 Assignment 2: https://github.com/lorenaps07/data-gnateater-research.git
 
