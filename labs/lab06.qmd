@@ -1,0 +1,130 @@
+---
+title: "lab06"
+format: gfm
+---
+
+# Load required packages
+```{r}
+library(tidyverse)
+library(knitr)
+```
+# Read in the data
+```{r}
+whales <- read_csv("https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/main/datasets/whales.csv")
+whales |> 
+  head() |> 
+  kable()
+```
+
+###  Question 1. Create a new data frame that has one row per observer, per species and one single variable of all the information collected. Name this data frame whales_long.
+```{r}
+whales_long <- whales |>
+pivot_longer(-1, names_to = "species", values_to = "information")
+whales_long |> 
+  head() |> 
+  kable()
+```
+
+### Question 2. Starting from whales_long, create another data frame that includes only events for which there is information. Name this data frame whales_clean.
+```{r}
+#?is.na()
+whales_clean <- whales_long |>
+  filter(!is.na(information))
+whales_clean |> 
+  head() |> 
+  kable()
+```
+
+### Question 3. Starting from whales_clean, create another data frame with one variable per type of information, one piece of information per cell. Some cells might be empty. Name this data frame whales_split.
+```{r}
+whales_split <- whales_clean |>
+  separate(information, c("date", "outcome", "size", "ocean"), ",")
+whales_split |> 
+  head() |> 
+  kable()
+
+#must use "," in separate to specify where to cut the string
+```
+### Question 4. Starting from whales_split, create another data frame in which all columns are parsed as instructed below. Name this data frame whales_parsed.
+```{r}
+whales_parsed <- whales_split |>
+  type_convert(
+    col_types = cols(
+      date = col_date(format = "%m/%d/%y"),
+      size = col_integer()
+    )
+  )
+whales_parsed |> 
+  head() |>
+  kable()
+```
+### Question 5. Using whales_parsed, print a summary table with: 1) number ship strikes by species, 2) average whale size by species, omitting NA values in the calculation
+
+```{r}
+whales_parsed |> 
+  group_by(species) |> 
+  summarise(number_of_ship_strikes = n(), average_size = mean(size, na.rm = T))  |>
+  kable()
+```
+### Question 6. Try to summarize as much information contained in whales_parsed as possible in one plot.
+```{r}
+whales_parsed |>
+  ggplot(aes(x=date, y = size, color=outcome)) +
+  geom_point() +
+  facet_grid(ocean~species)
+
+```
+
+```{r}
+# Load required packages
+#install.packages("babynames")
+library(babynames)
+
+
+babynames |> 
+  head() |> 
+  kable()
+
+#View(babynames)
+
+```
+### Question 1: What are the 6 most popular boy names and girl names of all time? How has the popularity of each of these names changed over time?
+
+```{r}
+top_6_boy_names <- babynames |>
+  filter(sex == "M") |>
+  group_by(name) |>
+  summarise(total_count=sum(n)) |>
+  slice_max(order_by = total_count, n = 6)
+
+top_6_girl_names <- babynames |>
+  filter(sex == "F") |>
+  group_by(name) |>
+  summarise(total_count=sum(n)) |>
+  slice_max(order_by = total_count, n = 6) 
+
+#slice_max(order_by = total_count, n = 6) select 6 rows with the highest values in total_count; in this instance, using arrange() and head() is equivalent
+
+babynames |>
+  filter(
+    (name %in% top_6_boy_names$name & sex == "M") | (name %in% top_6_girl_names$name & sex == "F")
+    ) |>
+  ggplot(aes(x=year, y=prop, group=name, color=sex)) +
+  geom_line() +
+  facet_wrap(~name)
+
+```
+
+### Question 2. What are the most popular boy names and girl names in each decade?
+
+```{r}
+babynames |>
+  mutate(decade = floor(year / 10) * 10) |>
+  group_by(decade, sex, name) |>
+  summarise(total = sum(n), .groups = "drop") |>
+  group_by(decade, sex) |>
+  slice_max(order_by = total, n = 1, with_ties = FALSE) |>
+  arrange(decade, sex) |>
+  kable()
+```
+
