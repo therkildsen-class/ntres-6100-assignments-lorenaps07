@@ -1,7 +1,8 @@
 # assignment_7
 
 
-<<<<<<< HEAD
+\<\<\<\<\<\<\< HEAD
+
 ``` r
 library(tidyverse)
 ```
@@ -54,30 +55,31 @@ number of electoral votes. Name this new dataset `q_1a`, and show its
 first 6 rows.
 
 ``` r
-relationship_pop_votes <- left_join(murders, results_us_election_2016, by = "state")
-head(relationship_pop_votes)
+q_1a <- left_join(murders, results_us_election_2016, by = "state")
+  kable(head(q_1a, 6))
 ```
 
-           state abb region population total electoral_votes  clinton    trump
-    1    Alabama  AL  South    4779736   135               9 34.35795 62.08309
-    2     Alaska  AK   West     710231    19               3 36.55087 51.28151
-    3    Arizona  AZ   West    6392017   232              11 44.58042 48.08314
-    4   Arkansas  AR  South    2915918    93               6 33.65190 60.57191
-    5 California  CA   West   37253956  1257              55 61.72640 31.61711
-    6   Colorado  CO   West    5029196    65               9 48.15651 43.25098
-       johnson     stein  mcmullin    others
-    1 2.094169 0.4422682 0.0000000 1.0225246
-    2 5.877128 1.8000176 0.0000000 4.4904710
-    3 4.082188 1.3185997 0.6699155 1.2657329
-    4 2.648769 0.8378174 1.1653206 1.1242832
-    5 3.374092 1.9649200 0.2792070 1.0382753
-    6 5.183748 1.3825031 1.0400874 0.9861714
+| state | abb | region | population | total | electoral_votes | clinton | trump | johnson | stein | mcmullin | others |
+|:---|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Alabama | AL | South | 4779736 | 135 | 9 | 34.35795 | 62.08309 | 2.094169 | 0.4422682 | 0.0000000 | 1.0225246 |
+| Alaska | AK | West | 710231 | 19 | 3 | 36.55087 | 51.28151 | 5.877128 | 1.8000176 | 0.0000000 | 4.4904710 |
+| Arizona | AZ | West | 6392017 | 232 | 11 | 44.58042 | 48.08314 | 4.082188 | 1.3185997 | 0.6699155 | 1.2657329 |
+| Arkansas | AR | South | 2915918 | 93 | 6 | 33.65190 | 60.57191 | 2.648769 | 0.8378174 | 1.1653206 | 1.1242832 |
+| California | CA | West | 37253956 | 1257 | 55 | 61.72640 | 31.61711 | 3.374092 | 1.9649200 | 0.2792070 | 1.0382753 |
+| Colorado | CO | West | 5029196 | 65 | 9 | 48.15651 | 43.25098 | 5.183748 | 1.3825031 | 1.0400874 | 0.9861714 |
 
 <br> <br>
 
 **1b.** Add a new variable in the `q_1a` dataset to indicate which
 candidate won in each state, and remove the columns `abb`, `region`, and
 `total`. Name this new dataset `q_1b`, and show its first 6 rows.
+
+``` r
+q_1b <- q_1a %>%
+  mutate(winner = ifelse(clinton > trump, "clinton", "trump")) %>%
+  select(-abb, -total, -region)
+kable(head(q_1b, 6))
+```
 
 | state | population | electoral_votes | clinton | trump | johnson | stein | mcmullin | others | winner |
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|:---|
@@ -95,7 +97,21 @@ population size and number of electoral votes. Use color to indicate who
 won the state. Fit a straight line to the data, set its color to black,
 size to 0.1, and turn off its confidence interval.
 
-![](assignment_7_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+``` r
+ggplot(q_1b, aes(x = population, y = electoral_votes, color = winner)) +
+  geom_point()+
+  geom_smooth(method = "lm", color = "black", size = 0.1, se = FALSE) +
+  labs(title = "Relationship between Population Size and Electoral Votes")
+```
+
+    Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+    ℹ Please use `linewidth` instead.
+
+    `geom_smooth()` using formula = 'y ~ x'
+
+![](assignment_7_files/figure-commonmark/unnamed-chunk-4-1.png)
+
+# I stopped here, continue from this part
 
 <br> <br>
 
@@ -256,6 +272,6 @@ the 2016 election?
 
 ![](assignment_7_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
-<br> <br>
-=======
->>>>>>> a944ed174328eb8b020804afd9f7bc0e98b8ad90
+# <br> <br>
+
+> > > > > > > a944ed174328eb8b020804afd9f7bc0e98b8ad90
