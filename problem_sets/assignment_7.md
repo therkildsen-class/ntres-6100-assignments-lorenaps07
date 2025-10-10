@@ -1,6 +1,7 @@
 # assignment_7
 
 
+<<<<<<< HEAD
 ``` r
 library(tidyverse)
 ```
@@ -256,3 +257,5 @@ the 2016 election?
 ![](assignment_7_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 <br> <br>
+=======
+>>>>>>> a944ed174328eb8b020804afd9f7bc0e98b8ad90
