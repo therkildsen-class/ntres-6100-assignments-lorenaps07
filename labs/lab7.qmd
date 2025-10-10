@@ -3,5 +3,12 @@ title: "lab7"
 format: gfm
 ---
 
+```{r}
+library(tidyverse)
+library(knitr)
+library(nycflights13)  #install.packages("nycflights13")
+
+flights |> head() |> kable()
+```
 
 
