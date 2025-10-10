@@ -31,3 +31,20 @@ flights |> head() |> kable()
 | 2013 | 1 | 1 | 544 | 545 | -1 | 1004 | 1022 | -18 | B6 | 725 | N804JB | JFK | BQN | 183 | 1576 | 5 | 45 | 2013-01-01 05:00:00 |
 | 2013 | 1 | 1 | 554 | 600 | -6 | 812 | 837 | -25 | DL | 461 | N668DN | LGA | ATL | 116 | 762 | 6 | 0 | 2013-01-01 06:00:00 |
 | 2013 | 1 | 1 | 554 | 558 | -4 | 740 | 728 | 12 | UA | 1696 | N39463 | EWR | ORD | 150 | 719 | 5 | 58 | 2013-01-01 05:00:00 |
+
+``` r
+avg_dest_delays <-
+  flights |>
+  group_by(dest) |>
+  # arrival delay NA's are cancelled flights
+  summarise(delay = mean(arr_delay, na.rm = TRUE)) |>
+  inner_join(airports, by = c(dest = "faa"))
+
+avg_dest_delays |>
+  ggplot(aes(lon, lat, colour = delay)) +
+  borders("state") +
+  geom_point() +
+  coord_quickmap()
+```
+
+![](lab7_files/figure-commonmark/unnamed-chunk-2-1.png)
