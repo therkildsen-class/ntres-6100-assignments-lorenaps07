@@ -7,7 +7,6 @@ format: gfm
 library(tidyverse)
 ```
 
-<<<<<<< HEAD
 ```{r}
 method1 <- x <- 1:1000
 y <- 11:2000
@@ -60,6 +59,3 @@ tibble(n_iterations, approach_1, approach_2) |>
   ggplot(aes(x=n_iterations, y=runtime, color=approach)) +
   geom_line()
 ```
-
-=======
->>>>>>> 583f07811f47577c46a2ad880f38b8e05b14bf5c
