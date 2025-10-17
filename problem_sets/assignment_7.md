@@ -127,18 +127,6 @@ q_2a <- q_1b %>%
 kable(head(q_2a, 6))
 ```
 
-<<<<<<< HEAD
-=======
-| state | clinton | trump | johnson | stein | mcmullin | others | winner | metric | value |
-|:---|---:|---:|---:|---:|---:|---:|:---|:---|---:|
-| Alabama | 34.35795 | 62.08309 | 2.094169 | 0.4422682 | 0.0000000 | 1.022525 | trump | population | 4779736 |
-| Alabama | 34.35795 | 62.08309 | 2.094169 | 0.4422682 | 0.0000000 | 1.022525 | trump | electoral_votes | 9 |
-| Alaska | 36.55087 | 51.28151 | 5.877128 | 1.8000176 | 0.0000000 | 4.490471 | trump | population | 710231 |
-| Alaska | 36.55087 | 51.28151 | 5.877128 | 1.8000176 | 0.0000000 | 4.490471 | trump | electoral_votes | 3 |
-| Arizona | 44.58042 | 48.08314 | 4.082188 | 1.3185997 | 0.6699155 | 1.265733 | trump | population | 6392017 |
-| Arizona | 44.58042 | 48.08314 | 4.082188 | 1.3185997 | 0.6699155 | 1.265733 | trump | electoral_votes | 11 |
-
->>>>>>> 34b7d58afa8b47d4a48daf7978fb7a4ee4b5c53f
 | state | clinton | trump | johnson | stein | mcmullin | others | winner | metric | value |
 |:---|---:|---:|---:|---:|---:|---:|:---|:---|---:|
 | Alabama | 34.35795 | 62.08309 | 2.094169 | 0.4422682 | 0.0000000 | 1.022525 | trump | population | 4779736 |
