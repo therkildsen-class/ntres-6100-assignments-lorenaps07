@@ -1,15 +1,14 @@
 # assignment_7
 
 
-
 ``` r
 library(tidyverse)
 ```
 
     ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ✔ dplyr     1.1.4     ✔ readr     2.1.5
-    ✔ forcats   1.0.0     ✔ stringr   1.5.1
-    ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+    ✔ forcats   1.0.1     ✔ stringr   1.5.2
+    ✔ ggplot2   4.0.0     ✔ tibble    3.3.0
     ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
     ✔ purrr     1.1.0     
     ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -110,8 +109,6 @@ ggplot(q_1b, aes(x = population, y = electoral_votes, color = winner)) +
 
 ![](assignment_7_files/figure-commonmark/unnamed-chunk-4-1.png)
 
-# I stopped here, continue from this part
-
 <br> <br>
 
 ### Question 2. Would the election result be any different if the number of electoral votes is exactly proportional to a state’s population size?
@@ -119,6 +116,25 @@ ggplot(q_1b, aes(x = population, y = electoral_votes, color = winner)) +
 **2a.** First, convert the `q_1b` dataset to longer format such that the
 `population` and `electoral_votes` columns are turned into rows as shown
 below. Name this new dataset `q_2a`, and show its first 6 rows.
+
+``` r
+q_2a <- q_1b %>%
+  pivot_longer(
+    cols = c(population, electoral_votes),
+    names_to = "metric",
+    values_to = "value")
+
+kable(head(q_2a, 6))
+```
+
+| state | clinton | trump | johnson | stein | mcmullin | others | winner | metric | value |
+|:---|---:|---:|---:|---:|---:|---:|:---|:---|---:|
+| Alabama | 34.35795 | 62.08309 | 2.094169 | 0.4422682 | 0.0000000 | 1.022525 | trump | population | 4779736 |
+| Alabama | 34.35795 | 62.08309 | 2.094169 | 0.4422682 | 0.0000000 | 1.022525 | trump | electoral_votes | 9 |
+| Alaska | 36.55087 | 51.28151 | 5.877128 | 1.8000176 | 0.0000000 | 4.490471 | trump | population | 710231 |
+| Alaska | 36.55087 | 51.28151 | 5.877128 | 1.8000176 | 0.0000000 | 4.490471 | trump | electoral_votes | 3 |
+| Arizona | 44.58042 | 48.08314 | 4.082188 | 1.3185997 | 0.6699155 | 1.265733 | trump | population | 6392017 |
+| Arizona | 44.58042 | 48.08314 | 4.082188 | 1.3185997 | 0.6699155 | 1.265733 | trump | electoral_votes | 11 |
 
 | state | clinton | trump | johnson | stein | mcmullin | others | winner | metric | value |
 |:---|---:|---:|---:|---:|---:|---:|:---|:---|---:|
