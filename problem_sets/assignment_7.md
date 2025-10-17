@@ -1,7 +1,6 @@
 # assignment_7
 
 
-\<\<\<\<\<\<\< HEAD
 
 ``` r
 library(tidyverse)

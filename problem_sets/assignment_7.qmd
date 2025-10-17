@@ -2,7 +2,6 @@
 title: "assignment_7"
 format: gfm
 ---
-<<<<<<< HEAD
 ```{r}
 library(tidyverse)
 library(knitr)
@@ -72,7 +71,14 @@ ggplot(q_1b, aes(x = population, y = electoral_votes, color = winner)) +
   labs(title = "Relationship between Population Size and Electoral Votes")
 ```
 
-# I stopped here, continue from this part
+```{r}
+ggplot(q_1b, aes(x = population, y = electoral_votes, color = winner)) +
+  geom_point()+
+  geom_smooth(method = "lm", color = "black", size = 0.1, se = FALSE) +
+  labs(title = "Relationship between Population Size and Electoral Votes")
+```
+
+
 <br> <br>
 
 ### Question 2. Would the election result be any different if the number of electoral votes is exactly proportional to a state’s population size?
