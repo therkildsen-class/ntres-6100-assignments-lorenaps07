@@ -1,5 +1,9 @@
 ---
 title: "lab8"
-format: html
+format: gfm
 ---
+
+```{r}
+library(tidyverse)
+```
 
