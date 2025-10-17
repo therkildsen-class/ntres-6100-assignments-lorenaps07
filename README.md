@@ -31,3 +31,5 @@ Assignment 3: https://lorenaps07.github.io/assignment-3-lp455/
 >>>>>>> dc93721e7915df285469018abe2511f714157f8f
 
 Assignment 5: [problem_sets/assignment_5.md](https://github.com/therkildsen-class/ntres-6100-assignments-lorenaps07/blob/2b8d7b0fb09e8ff45894e17195cb9b547921521b/problem_sets/assignment_5.md)
+
+Assignment 7: problem_sets/assignment_7.md
