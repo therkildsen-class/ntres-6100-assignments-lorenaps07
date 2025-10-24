@@ -209,7 +209,8 @@ below. Name this new dataset `q_3a`, and print it. <br>
 `others` as shown below.*
 
 ``` r
-election_data <- read_csv("https://raw.githubusercontent.com/kshaffer/election2016/master/2016ElectionResultsByState.csv")
+url <- "https://raw.githubusercontent.com/kshaffer/election2016/master/2016ElectionResultsByState.csv"
+election_data <- read_csv(url)
 ```
 
     Rows: 51 Columns: 11
@@ -225,30 +226,29 @@ election_data <- read_csv("https://raw.githubusercontent.com/kshaffer/election20
 q_3a <- election_data %>%
   pivot_longer(
     cols = c(clintonVotes, trumpVotes, johnsonVotes, steinVotes, mcmullinVotes, othersVotes),
-    names_to = "winner",
-    values_to = "value"
+    names_to = "candidate",
+    values_to = "votes"
   ) %>%
   mutate(
-    winner = ifelse(winner %in% c("johnson", "stein", "mcmullin", "others"),
-                    "others", winner)
-  ) %>%
-  group_by(winner) %>%
-  summarise(value = sum(value, na.rm = TRUE)) %>%
+    candidate = case_when(
+      candidate == "clintonVotes" ~ "clinton",
+      candidate == "trumpVotes" ~ "trump",
+      candidate %in% c("johnsonVotes", "steinVotes", "mcmullinVotes", "othersVotes") ~ "others"
+    )
+  ) %>%  group_by(candidate) %>%
+  summarise(value = sum(votes, na.rm = TRUE)) %>%
   ungroup() %>%
+  rename(winner = candidate) %>%
   mutate(metric = "popular_votes") %>%
   select(metric, winner, value)
-
 kable(q_3a)
 ```
 
-| metric        | winner        |    value |
-|:--------------|:--------------|---------:|
-| popular_votes | clintonVotes  | 65125640 |
-| popular_votes | johnsonVotes  |  4468324 |
-| popular_votes | mcmullinVotes |   608511 |
-| popular_votes | othersVotes   |   541623 |
-| popular_votes | steinVotes    |  1436516 |
-| popular_votes | trumpVotes    | 62616675 |
+| metric        | winner  |    value |
+|:--------------|:--------|---------:|
+| popular_votes | clinton | 65125640 |
+| popular_votes | others  |  7054974 |
+| popular_votes | trump   | 62616675 |
 
 <br> <br>
 
@@ -256,7 +256,8 @@ kable(q_3a)
 new dataset `q_3b`, and print it as shown below.
 
 ``` r
-#could not do it
+q_3b <- bind_rows(q_2b, q_3a)
+kable(q_3b)
 ```
 
 | metric          | winner  |     value |
@@ -266,8 +267,8 @@ new dataset `q_3b`, and print it as shown below.
 | population      | clinton | 134982448 |
 | population      | trump   | 174881780 |
 | popular_votes   | clinton |  65125640 |
-| popular_votes   | trump   |  62616675 |
 | popular_votes   | others  |   7054974 |
+| popular_votes   | trump   |  62616675 |
 
 <br> <br>
 
@@ -279,8 +280,25 @@ population size, and **3)** the election result is determined by the
 popular vote.
 
 ``` r
-#could not do it :(
+q_3c <- ggplot(q_3b, aes(x = metric, y = value, fill = winner)) +
+  geom_col(position = "fill") +
+  labs(
+    x = "Metric",
+    y = NULL,
+    title = "Comparison of Vote Share by Winner under Different Scenarios",
+    fill = "Winner"
+  ) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(hjust = 0.5)
+  )
+q_3c
 ```
+
+![](assignment_7_files/figure-commonmark/unnamed-chunk-10-1.png)
 
 <br> <br>
 
@@ -382,3 +400,22 @@ head(q_4b)
 options to adjust the dimensions of the plot to make it longer than the
 default dimension. Based on this plot, where did the polls get wrong in
 the 2016 election?
+
+``` r
+ggplot(q_4b, aes(x = reorder(state, polling_error), y = polling_error, color = result)) +
+  geom_point(size = 3) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+  coord_flip() +
+  labs(
+    x = "State",
+    y = "Polling Error (Percentage Points)",
+    title = "Polling Errors in the 2016 Election by State",
+    color = "Prediction Result"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  ) 
+```
+
+![](assignment_7_files/figure-commonmark/unnamed-chunk-13-1.png)
