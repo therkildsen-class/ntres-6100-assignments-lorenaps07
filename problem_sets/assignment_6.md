@@ -7,8 +7,8 @@ library(tidyverse)
 
     ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ✔ dplyr     1.1.4     ✔ readr     2.1.5
-    ✔ forcats   1.0.0     ✔ stringr   1.5.1
-    ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+    ✔ forcats   1.0.1     ✔ stringr   1.5.2
+    ✔ ggplot2   4.0.0     ✔ tibble    3.3.0
     ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
     ✔ purrr     1.1.0     
     ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -40,55 +40,45 @@ data_with_tribble
     1     1   2.1 apple 
     2     2   3.2 orange
 
-``` r
-data_with_tibble <- tibble(a = c(1L, 2L), b = c(2.1, 3.2), c = c("apple", "orange"))
-
-data_with_tibble
-```
-
-    # A tibble: 2 × 3
-          a     b c     
-      <int> <dbl> <chr> 
-    1     1   2.1 apple 
-    2     2   3.2 orange
-
 <br>
 
 #### 1.2 Import `https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset2.txt` into R. Change the column names into “Name”, “Weight”, “Price”.
 
-<br>
-
-#### 1.3 Import `https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset3.txt` into R. Watch out for the first few lines, missing values, separators, quotation marks, and deliminaters.
-
 ``` r
-data3 <- read_delim(
-  "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset3.txt",
-  delim = ",",          # Data are comma-separated
-  skip = 2,             # Skip the first two non-data lines
-  na = c("", "NA"),     # Treat blanks and "NA" as missing
-  quote = "\"",         # Handle quoted text properly
-  trim_ws = TRUE        # Trim extra spaces around values
+exercise1.2 <- read_table(
+  "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset2.txt",
+  col_names = c("Name", "Weight", "Price")  # Assign clear column names
 )
 ```
 
-    Rows: 3 Columns: 1
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ","
-    chr (1): /Name/;/Weight/;/Price/
 
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    ── Column specification ────────────────────────────────────────────────────────
+    cols(
+      Name = col_character(),
+      Weight = col_character(),
+      Price = col_character()
+    )
+
+    Warning: 3 parsing failures.
+    row col  expected    actual                                                                                           file
+      1  -- 3 columns 1 columns 'https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset2.txt'
+      2  -- 3 columns 1 columns 'https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset2.txt'
+      3  -- 3 columns 1 columns 'https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset2.txt'
 
 ``` r
-data3
+exercise1.2
 ```
 
-    # A tibble: 3 × 1
-      `/Name/;/Weight/;/Price/`
-      <chr>                    
-    1 /apple/;1;2.9            
-    2 /orange/;2;Not Available 
-    3 /durian/;?;19.9          
+    # A tibble: 3 × 3
+      Name           Weight Price
+      <chr>          <chr>  <chr>
+    1 apple,1,2.9    <NA>   <NA> 
+    2 orange,2,4.9   <NA>   <NA> 
+    3 durian,10,19.9 <NA>   <NA> 
+
+<br>
+
+#### 1.3 Import `https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset3.txt` into R. Watch out for the first few lines, missing values, separators, quotation marks, and deliminaters.
 
 <br>
 
