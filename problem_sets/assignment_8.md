@@ -45,7 +45,15 @@ so much. It has an estimated `a` of `0.73` and `b` of `3.63`. What is
 the estimated mass of a *Spinosaurus* that is `16` m long based on its
 reassembled skeleton?
 
-    ## [1] 17150.56
+``` r
+length_spinosaurus <- 16
+a_spinosaurus <- 0.73
+b_spinosaurus <- 3.63
+mass_spinosaurus <- a_spinosaurus * length_spinosaurus ^ b_spinosaurus
+mass_spinosaurus
+```
+
+    [1] 17150.56
 
 <br>
 
@@ -67,91 +75,131 @@ b_values <- c(3.63, 3.57, 3.51, 3.5, 3.65, 3.64, 3.6, 3.59, 3.58, 3.61, 3.55, 3.
 
 - with vectorization:
 
-<!-- -->
-
-    ##   [1]  75732.156  17152.583  68224.300  53443.180  12465.526  82871.894
-    ##   [7]  31287.166  20000.691  70381.842  14507.491   7863.503  19439.106
-    ##  [13]  48225.051  59488.263  53656.348  21967.634  10390.443  43987.593
-    ##  [19] 125177.887   4190.377  36685.993  19549.689  25017.870   8565.185
-    ##  [25]   8098.790  75953.884  64154.893 105636.307  77600.359  33114.200
-    ##  [31]  31655.272  87389.265  71894.947   6090.243   2642.665 198103.512
-    ##  [37]  10880.402  55815.226  54501.579  45296.380  28412.008  24800.542
-    ##  [43] 162675.061  22524.286 135709.460  15716.604  10112.624  53271.976
-    ##  [49]  62832.804  80255.569   4353.771  38897.517  26715.607  15793.892
-    ##  [55]  10325.366  73709.149 103634.886  20991.235  61455.747 100109.156
-    ##  [61]  10925.701   3886.295   3122.129  31236.232 101035.102  60839.743
-    ##  [67]   8850.301   4603.468  41892.107  84366.543  21197.532  99359.493
-    ##  [73]   6441.404   2306.322  63164.948  66282.921  71821.433   4572.514
-    ##  [79]  33120.886  35158.076  11247.037  19699.272  45396.221   7459.738
-    ##  [85]  41082.625  50782.941  19595.141  78145.329  28042.175  25080.395
-    ##  [91]  26874.304  74871.540  34631.894  27877.359   7290.719  60834.232
-    ##  [97]  17502.714   4608.604  49055.660  39858.965  87129.797   4572.445
-    ## [103]  17343.296  11530.243 143340.658  71817.199  35865.219  60498.867
-    ## [109]  12379.511  43575.170  23089.764 129813.479 199743.944 158197.314
-    ## [115]  96301.231  47231.789  21697.618  50347.392  78750.559  25519.967
-    ## [121]  38190.965  89906.604  26823.649  76468.432  22255.036  83156.870
-    ## [127]  54098.805  17601.506  16675.526  31819.240  75313.493 113092.919
-    ## [133] 171397.899  15565.197  45847.049  56982.291  32178.686  94538.967
-    ## [139]  71980.723  30875.376  41976.886 113756.472  20614.865  11832.900
-    ## [145]  19586.434 105067.444   8114.965  52490.763  40736.984  91205.242
-    ## [151]   4426.503  78393.261  38643.061  88779.896  10204.627  23898.969
-    ## [157] 126784.661  17778.140  28979.490  74162.843  79499.131  21354.206
-    ## [163]  83759.114  14625.936  89398.592  42774.316  82110.968  41496.817
-    ## [169] 150435.099  36740.602  70303.922  58362.730  34595.007  16414.041
-    ## [175]  21213.278  41080.930 235485.149   5766.954  50147.933  32144.352
-    ## [181]  52660.792  41212.206  60878.382  69510.164   5099.709  45224.935
-    ## [187]  65130.065 107133.268  58414.045   5111.836  43986.763  63035.231
-    ## [193]  32968.612  15437.705 203419.101 152108.804  87102.622  39397.447
-    ## [199]  18317.152  78184.912
-
-**Hint:** If you are unsure about how vectorized operations work, check
-out the results that the following lines return.
-
 ``` r
-c(1, 2, 3) + c(4, 5, 6)
-c(1, 2, 3) * c(4, 5, 6)
+mass_vectorized <- a_values * dinosaur_lengths ^ b_values
+mass_vectorized
 ```
+
+      [1]  75732.156  17152.583  68224.300  53443.180  12465.526  82871.894
+      [7]  31287.166  20000.691  70381.842  14507.491   7863.503  19439.106
+     [13]  48225.051  59488.263  53656.348  21967.634  10390.443  43987.593
+     [19] 125177.887   4190.377  36685.993  19549.689  25017.870   8565.185
+     [25]   8098.790  75953.884  64154.893 105636.307  77600.359  33114.200
+     [31]  31655.272  87389.265  71894.947   6090.243   2642.665 198103.512
+     [37]  10880.402  55815.226  54501.579  45296.380  28412.008  24800.542
+     [43] 162675.061  22524.286 135709.460  15716.604  10112.624  53271.976
+     [49]  62832.804  80255.569   4353.771  38897.517  26715.607  15793.892
+     [55]  10325.366  73709.149 103634.886  20991.235  61455.747 100109.156
+     [61]  10925.701   3886.295   3122.129  31236.232 101035.102  60839.743
+     [67]   8850.301   4603.468  41892.107  84366.543  21197.532  99359.493
+     [73]   6441.404   2306.322  63164.948  66282.921  71821.433   4572.514
+     [79]  33120.886  35158.076  11247.037  19699.272  45396.221   7459.738
+     [85]  41082.625  50782.941  19595.141  78145.329  28042.175  25080.395
+     [91]  26874.304  74871.540  34631.894  27877.359   7290.719  60834.232
+     [97]  17502.714   4608.604  49055.660  39858.965  87129.797   4572.445
+    [103]  17343.296  11530.243 143340.658  71817.199  35865.219  60498.867
+    [109]  12379.511  43575.170  23089.764 129813.479 199743.944 158197.314
+    [115]  96301.231  47231.789  21697.618  50347.392  78750.559  25519.967
+    [121]  38190.965  89906.604  26823.649  76468.432  22255.036  83156.870
+    [127]  54098.805  17601.506  16675.526  31819.240  75313.493 113092.919
+    [133] 171397.899  15565.197  45847.049  56982.291  32178.686  94538.967
+    [139]  71980.723  30875.376  41976.886 113756.472  20614.865  11832.900
+    [145]  19586.434 105067.444   8114.965  52490.763  40736.984  91205.242
+    [151]   4426.503  78393.261  38643.061  88779.896  10204.627  23898.969
+    [157] 126784.661  17778.140  28979.490  74162.843  79499.131  21354.206
+    [163]  83759.114  14625.936  89398.592  42774.316  82110.968  41496.817
+    [169] 150435.099  36740.602  70303.922  58362.730  34595.007  16414.041
+    [175]  21213.278  41080.930 235485.149   5766.954  50147.933  32144.352
+    [181]  52660.792  41212.206  60878.382  69510.164   5099.709  45224.935
+    [187]  65130.065 107133.268  58414.045   5111.836  43986.763  63035.231
+    [193]  32968.612  15437.705 203419.101 152108.804  87102.622  39397.447
+    [199]  18317.152  78184.912
 
 <br>
 
 - with a for loop:
 
-<!-- -->
+``` r
+mass_for_loop <- NULL
+for (i in 1:length(dinosaur_lengths)){
+  mass_for_loop <- c(mass_for_loop, a_values[i] * dinosaur_lengths[i] ^ b_values[i])
+}
+mass_for_loop
+```
 
-    ##   [1]  75732.156  17152.583  68224.300  53443.180  12465.526  82871.894
-    ##   [7]  31287.166  20000.691  70381.842  14507.491   7863.503  19439.106
-    ##  [13]  48225.051  59488.263  53656.348  21967.634  10390.443  43987.593
-    ##  [19] 125177.887   4190.377  36685.993  19549.689  25017.870   8565.185
-    ##  [25]   8098.790  75953.884  64154.893 105636.307  77600.359  33114.200
-    ##  [31]  31655.272  87389.265  71894.947   6090.243   2642.665 198103.512
-    ##  [37]  10880.402  55815.226  54501.579  45296.380  28412.008  24800.542
-    ##  [43] 162675.061  22524.286 135709.460  15716.604  10112.624  53271.976
-    ##  [49]  62832.804  80255.569   4353.771  38897.517  26715.607  15793.892
-    ##  [55]  10325.366  73709.149 103634.886  20991.235  61455.747 100109.156
-    ##  [61]  10925.701   3886.295   3122.129  31236.232 101035.102  60839.743
-    ##  [67]   8850.301   4603.468  41892.107  84366.543  21197.532  99359.493
-    ##  [73]   6441.404   2306.322  63164.948  66282.921  71821.433   4572.514
-    ##  [79]  33120.886  35158.076  11247.037  19699.272  45396.221   7459.738
-    ##  [85]  41082.625  50782.941  19595.141  78145.329  28042.175  25080.395
-    ##  [91]  26874.304  74871.540  34631.894  27877.359   7290.719  60834.232
-    ##  [97]  17502.714   4608.604  49055.660  39858.965  87129.797   4572.445
-    ## [103]  17343.296  11530.243 143340.658  71817.199  35865.219  60498.867
-    ## [109]  12379.511  43575.170  23089.764 129813.479 199743.944 158197.314
-    ## [115]  96301.231  47231.789  21697.618  50347.392  78750.559  25519.967
-    ## [121]  38190.965  89906.604  26823.649  76468.432  22255.036  83156.870
-    ## [127]  54098.805  17601.506  16675.526  31819.240  75313.493 113092.919
-    ## [133] 171397.899  15565.197  45847.049  56982.291  32178.686  94538.967
-    ## [139]  71980.723  30875.376  41976.886 113756.472  20614.865  11832.900
-    ## [145]  19586.434 105067.444   8114.965  52490.763  40736.984  91205.242
-    ## [151]   4426.503  78393.261  38643.061  88779.896  10204.627  23898.969
-    ## [157] 126784.661  17778.140  28979.490  74162.843  79499.131  21354.206
-    ## [163]  83759.114  14625.936  89398.592  42774.316  82110.968  41496.817
-    ## [169] 150435.099  36740.602  70303.922  58362.730  34595.007  16414.041
-    ## [175]  21213.278  41080.930 235485.149   5766.954  50147.933  32144.352
-    ## [181]  52660.792  41212.206  60878.382  69510.164   5099.709  45224.935
-    ## [187]  65130.065 107133.268  58414.045   5111.836  43986.763  63035.231
-    ## [193]  32968.612  15437.705 203419.101 152108.804  87102.622  39397.447
-    ## [199]  18317.152  78184.912
+      [1]  75732.156  17152.583  68224.300  53443.180  12465.526  82871.894
+      [7]  31287.166  20000.691  70381.842  14507.491   7863.503  19439.106
+     [13]  48225.051  59488.263  53656.348  21967.634  10390.443  43987.593
+     [19] 125177.887   4190.377  36685.993  19549.689  25017.870   8565.185
+     [25]   8098.790  75953.884  64154.893 105636.307  77600.359  33114.200
+     [31]  31655.272  87389.265  71894.947   6090.243   2642.665 198103.512
+     [37]  10880.402  55815.226  54501.579  45296.380  28412.008  24800.542
+     [43] 162675.061  22524.286 135709.460  15716.604  10112.624  53271.976
+     [49]  62832.804  80255.569   4353.771  38897.517  26715.607  15793.892
+     [55]  10325.366  73709.149 103634.886  20991.235  61455.747 100109.156
+     [61]  10925.701   3886.295   3122.129  31236.232 101035.102  60839.743
+     [67]   8850.301   4603.468  41892.107  84366.543  21197.532  99359.493
+     [73]   6441.404   2306.322  63164.948  66282.921  71821.433   4572.514
+     [79]  33120.886  35158.076  11247.037  19699.272  45396.221   7459.738
+     [85]  41082.625  50782.941  19595.141  78145.329  28042.175  25080.395
+     [91]  26874.304  74871.540  34631.894  27877.359   7290.719  60834.232
+     [97]  17502.714   4608.604  49055.660  39858.965  87129.797   4572.445
+    [103]  17343.296  11530.243 143340.658  71817.199  35865.219  60498.867
+    [109]  12379.511  43575.170  23089.764 129813.479 199743.944 158197.314
+    [115]  96301.231  47231.789  21697.618  50347.392  78750.559  25519.967
+    [121]  38190.965  89906.604  26823.649  76468.432  22255.036  83156.870
+    [127]  54098.805  17601.506  16675.526  31819.240  75313.493 113092.919
+    [133] 171397.899  15565.197  45847.049  56982.291  32178.686  94538.967
+    [139]  71980.723  30875.376  41976.886 113756.472  20614.865  11832.900
+    [145]  19586.434 105067.444   8114.965  52490.763  40736.984  91205.242
+    [151]   4426.503  78393.261  38643.061  88779.896  10204.627  23898.969
+    [157] 126784.661  17778.140  28979.490  74162.843  79499.131  21354.206
+    [163]  83759.114  14625.936  89398.592  42774.316  82110.968  41496.817
+    [169] 150435.099  36740.602  70303.922  58362.730  34595.007  16414.041
+    [175]  21213.278  41080.930 235485.149   5766.954  50147.933  32144.352
+    [181]  52660.792  41212.206  60878.382  69510.164   5099.709  45224.935
+    [187]  65130.065 107133.268  58414.045   5111.836  43986.763  63035.231
+    [193]  32968.612  15437.705 203419.101 152108.804  87102.622  39397.447
+    [199]  18317.152  78184.912
+
+``` r
+mass_for_loop
+```
+
+      [1]  75732.156  17152.583  68224.300  53443.180  12465.526  82871.894
+      [7]  31287.166  20000.691  70381.842  14507.491   7863.503  19439.106
+     [13]  48225.051  59488.263  53656.348  21967.634  10390.443  43987.593
+     [19] 125177.887   4190.377  36685.993  19549.689  25017.870   8565.185
+     [25]   8098.790  75953.884  64154.893 105636.307  77600.359  33114.200
+     [31]  31655.272  87389.265  71894.947   6090.243   2642.665 198103.512
+     [37]  10880.402  55815.226  54501.579  45296.380  28412.008  24800.542
+     [43] 162675.061  22524.286 135709.460  15716.604  10112.624  53271.976
+     [49]  62832.804  80255.569   4353.771  38897.517  26715.607  15793.892
+     [55]  10325.366  73709.149 103634.886  20991.235  61455.747 100109.156
+     [61]  10925.701   3886.295   3122.129  31236.232 101035.102  60839.743
+     [67]   8850.301   4603.468  41892.107  84366.543  21197.532  99359.493
+     [73]   6441.404   2306.322  63164.948  66282.921  71821.433   4572.514
+     [79]  33120.886  35158.076  11247.037  19699.272  45396.221   7459.738
+     [85]  41082.625  50782.941  19595.141  78145.329  28042.175  25080.395
+     [91]  26874.304  74871.540  34631.894  27877.359   7290.719  60834.232
+     [97]  17502.714   4608.604  49055.660  39858.965  87129.797   4572.445
+    [103]  17343.296  11530.243 143340.658  71817.199  35865.219  60498.867
+    [109]  12379.511  43575.170  23089.764 129813.479 199743.944 158197.314
+    [115]  96301.231  47231.789  21697.618  50347.392  78750.559  25519.967
+    [121]  38190.965  89906.604  26823.649  76468.432  22255.036  83156.870
+    [127]  54098.805  17601.506  16675.526  31819.240  75313.493 113092.919
+    [133] 171397.899  15565.197  45847.049  56982.291  32178.686  94538.967
+    [139]  71980.723  30875.376  41976.886 113756.472  20614.865  11832.900
+    [145]  19586.434 105067.444   8114.965  52490.763  40736.984  91205.242
+    [151]   4426.503  78393.261  38643.061  88779.896  10204.627  23898.969
+    [157] 126784.661  17778.140  28979.490  74162.843  79499.131  21354.206
+    [163]  83759.114  14625.936  89398.592  42774.316  82110.968  41496.817
+    [169] 150435.099  36740.602  70303.922  58362.730  34595.007  16414.041
+    [175]  21213.278  41080.930 235485.149   5766.954  50147.933  32144.352
+    [181]  52660.792  41212.206  60878.382  69510.164   5099.709  45224.935
+    [187]  65130.065 107133.268  58414.045   5111.836  43986.763  63035.231
+    [193]  32968.612  15437.705 203419.101 152108.804  87102.622  39397.447
+    [199]  18317.152  78184.912
 
 <br>
 
@@ -165,18 +213,29 @@ the for loop approach in the previous question.
 
 - vectorization:
 
-<!-- -->
+``` r
+system.time({
+  mass_vectorized <- a_values * dinosaur_lengths ^ b_values
+})
+```
 
-    ##    user  system elapsed 
-    ##       0       0       0
+       user  system elapsed 
+          0       0       0 
 
 - for loop (you will need to put the entire for loop inside the brackets
   of `system.time()`:
 
-<!-- -->
+``` r
+system.time({
+  mass_for_loop <- NULL
+  for (i in 1:length(dinosaur_lengths)){
+    mass_for_loop <- c(mass_for_loop, a_values[i] * dinosaur_lengths[i] ^ b_values[i])
+  }
+})
+```
 
-    ##    user  system elapsed 
-    ##   0.001   0.000   0.001
+       user  system elapsed 
+          0       0       0 
 
 <br>
 
@@ -206,13 +265,75 @@ in the
 - What parts are different?
 
 ``` r
+library(tidyverse)
+```
+
+    ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ✔ dplyr     1.1.4     ✔ readr     2.1.5
+    ✔ forcats   1.0.1     ✔ stringr   1.5.2
+    ✔ ggplot2   4.0.0     ✔ tibble    3.3.0
+    ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+    ✔ purrr     1.1.0     
+    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ✖ dplyr::filter() masks stats::filter()
+    ✖ dplyr::lag()    masks stats::lag()
+    ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
 buoy_1987 <- read_csv('https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1987.csv', na = c("99", "999", "99.00", "999.0"))
+```
+
+    Rows: 7602 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
 buoy_1988 <- read_csv('https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1988.csv', na = c("99", "999", "99.00", "999.0"))
+```
+
+    Rows: 8071 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
 buoy_1989 <- read_csv('https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1989.csv', na = c("99", "999", "99.00", "999.0"))
+```
+
+    Rows: 7933 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
 buoy_1990 <- read_csv('https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1990.csv', na = c("99", "999", "99.00", "999.0"))
 ```
 
-Answer: *Write your response here.*
+    Rows: 8703 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+Answer: *The parts that are different are the years, so you have
+buoy_1987, 1988, 1989, 1990. The rest of the code is basically the same,
+so it looks for the data for the named year in the same dataset.*
 
 <br>
 
@@ -222,19 +343,17 @@ Answer: *Write your response here.*
 start <- 1987
 end <- 1992
 for (year in start:end){
-  path <- str_c(________________________________________________________________________________________________________)
+  path <- str_c("https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_", year, ".csv")
   print(path)
 }
 ```
 
-Here is how it should work with `start = 1987` and `end = 1992`:
-
-    ## [1] "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1987.csv"
-    ## [1] "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1988.csv"
-    ## [1] "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1989.csv"
-    ## [1] "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1990.csv"
-    ## [1] "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1991.csv"
-    ## [1] "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1992.csv"
+    [1] "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1987.csv"
+    [1] "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1988.csv"
+    [1] "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1989.csv"
+    [1] "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1990.csv"
+    [1] "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1991.csv"
+    [1] "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_1992.csv"
 
 <br>
 
@@ -247,12 +366,66 @@ start <- 1987
 end <- 1992
 df_combined <- NULL
 for (year in start:end){
-  path <- str_c(________________________________________________________________________________________________________)
-  df <- read_csv(___________________________________________)
-  df_combined <- _________________________
+  path <- str_c("https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_", year, ".csv")
+  df <- read_csv(path, na = c("99", "999", "99.00", "999.0"))
+  df_combined <- bind_rows(df_combined, df)
 }
+```
+
+    Rows: 7602 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    Rows: 8071 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    Rows: 7933 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    Rows: 8703 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    Rows: 8730 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    Rows: 8736 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
 dim(df_combined)
 ```
+
+    [1] 49775    16
 
 Here is the dimension of the combined data frame (`df_combined`) with
 `start = 1987` and `end = 1992`:
@@ -261,7 +434,7 @@ Here is the dimension of the combined data frame (`df_combined`) with
 dim(df_combined)
 ```
 
-    ## [1] 49775    16
+    [1] 49775    16
 
 <br>
 
@@ -281,38 +454,108 @@ loop. We recommend you to do the cleanup within the loop though as a
 chance to practice. In the next (optional) question, however, it is
 necessary to clean up the data in the loop before you can combine them.
 
-![](assignment_8_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->![](assignment_8_files/figure-gfm/unnamed-chunk-16-2.png)<!-- -->
+``` r
+start <- 1987
+end <- 1992
+df_summary <- NULL
+for (year in start:end){
+  path <- str_c("https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/buoydata/44013_", year, ".csv")
+  df <- read_csv(path, na = c("99", "999", "99.00", "999.0")) %>%
+    select(YY, MM, WVHT, WTMP) %>%
+    rename(
+      year = YY,
+      month = MM,
+      wave_height = WVHT,
+      water_temp = WTMP
+    ) %>%
+    group_by(year, month) %>%
+    summarise(
+      avg_wave_height = mean(wave_height, na.rm = TRUE),
+      avg_water_temp = mean(water_temp, na.rm = TRUE)
+    ) %>%
+    ungroup()
+  df_summary <- bind_rows(df_summary, df)
+}
+```
 
-<br>
+    Rows: 7602 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
 
-#### 2.5 Now, further generalize your loop so that it works for any year **between 1987 and 2013**. **(OPTIONAL)**
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
+    Rows: 8071 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
 
-**Here are a few things that you should pay attention to:**
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
+    Rows: 7933 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
 
-- The first three column have consistently contained information on
-  year, month, and date (and in that order), but they have had different
-  names throughout the years.
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
+    Rows: 8703 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
 
-- The first column (year) followed a two-digit format from 1987 to 1998,
-  but has (understandably) switched to a four-digit format since
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
+    Rows: 8730 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
 
-  1999. 
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
+    Rows: 8736 Columns: 16
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (13): YY, MM, DD, hh, WD, WSPD, GST, WVHT, DPD, APD, BAR, ATMP, WTMP
+    lgl  (3): MWD, DEWP, VIS
 
-- Starting from 2007, a second row appears after the header to show the
-  unit for each column, and it needs to be filtered out.
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
 
-**Hints**:
+``` r
+library(lubridate)
+df_summary <- df_summary %>%
+  mutate(date = ymd(str_c(year, month, "15", sep = "-")))
+library(ggplot2)
+ggplot(df_summary, aes(x = date)) +
+  geom_line(aes(y = avg_wave_height), color = "lightblue") +
+  geom_point(aes(y = avg_wave_height), color = "black", size = 1) +
+  labs(title = "Monthly Averaged Wave Heights Over Time", y = "Avg Wave Height (m)") +
+  theme_minimal()
+```
 
-- use conditional execution to deal with the inconsistencies above
+![](assignment_8_files/figure-commonmark/unnamed-chunk-11-1.png)
 
-- don’t worry about parsing failures in columns other than the ones that
-  you will use for this exercise
+``` r
+ggplot(df_summary, aes(x = date)) +
+  geom_line(aes(y = avg_water_temp), color = "lightgreen") +
+  geom_point(aes(y = avg_water_temp), color = "black", size = 1) +
+  labs(title = "Monthly Averaged Water Temperatures Over Time", y = "Avg Water Temp (°C)") +
+  theme_minimal()
+```
 
-- there is a lot of missing temperature data during the mid 90s,
-  resulting in a gap in the time series. The wave height data, however,
-  appears to be continuous
-
-![](assignment_8_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->![](assignment_8_files/figure-gfm/unnamed-chunk-17-2.png)<!-- -->
+![](assignment_8_files/figure-commonmark/unnamed-chunk-11-2.png)
 
 <br>
 
@@ -322,8 +565,14 @@ necessary to clean up the data in the loop before you can combine them.
 
 #### When is vectorization preferable to loops in R, and when are loops the right choice? Provide two concrete examples from the assignment.
 
+### Vectorization is better for when we have a vector or a data set where we can extract the the parameters. It is efficient when we want to run both simultaneously in the same operation, for example in exercise 1.2. In that exercise, vectorization was faster and less code was needed to run the operation.
+
+### Loops are better for cases like the one in exercise 2.3. This exercise needed a code to loop through the data set pulling out the values we wanted, rather than computing two specific parameters in different data sets. Loops are good for tasks that require sequential processing or when working with datasets.
+
 <br>
 
 #### Which AI prompt was most helpful? What did you learn, and how was correctness verified? Include before/after code snippets with commentary.
+
+### I had the help of Git Copilot especially for exercise 2.4, which required multiple steps and was extremmely helpful. Copilot provided a suggested code, but I wanted to improve the graph so I used ChatGPT to help me with finding the right geom\_ to plot the dots on the line relative to the specific data set. I verified correctness by running the code and checking the output to ensure it matched the expected results. The prompt I used was “I have a date set I want to plot the variation of monthly averaged values in wave heights and temperatures over time. I have my plot with the geom_line function, but I want to see points at the specific values I have in the data set. What is the code necessary to have the specific points as dots, but a line running through and connecting them?” and the output was “In R’s ggplot2, the best way to show both the individual data points and the connecting line is to use geom_line() and geom_point() together.”
 
 <br>

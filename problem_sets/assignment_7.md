@@ -382,7 +382,3 @@ head(q_4b)
 options to adjust the dimensions of the plot to make it longer than the
 default dimension. Based on this plot, where did the polls get wrong in
 the 2016 election?
-
-``` r
-#could not do it
-```
