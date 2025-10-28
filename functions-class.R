@@ -136,3 +136,38 @@ for (cntry in country_list) {
   save_plot(cntry)
   
 }
+
+# now using the function to get some outputs we define
+dir.create("figures") 
+dir.create("figures/Europe") 
+
+## We still keep our calculation outside the function because we can do this as a single step for all countries outside the function. But we could also build this step into our function if we prefer.
+gap_europe <- gapminder |>
+  filter(continent == "Europe") |>
+  mutate(gdpTot = gdpPercap * pop)
+
+#define our function
+save_plot <- function(cntry, stat = "gdpPercap", filetype = "pdf") {   # Here I'm adding additional arguments to the function, which we'll use to specify what statistic we want plotted and what filetype we want
+  
+  ## filter the country to plot
+  gap_to_plot <- gap_europe |>
+    filter(country == cntry)
+  
+  ## add a print message to see what's plotting
+  print(paste("Plotting", cntry))
+  
+  ## plot
+  my_plot <- ggplot(data = gap_to_plot, aes(x = year, y = get(stat))) +    # We need to use get() here to access the value we store as stat when we call the function
+    geom_point() +
+    ## add title and save
+    labs(title = paste(cntry, stat, sep = " "), y = stat)
+  
+  ggsave(filename = paste("figures/Europe/", cntry, "_", stat, ".", filetype, sep = ""), plot = my_plot)
+} 
+
+
+# Testing our function
+save_plot("Germany")
+save_plot("Germany", "lifeExp", "jpg")
+
+
