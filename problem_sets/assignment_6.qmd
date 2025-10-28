@@ -42,7 +42,12 @@ exercise1.2
 #### 1.3 Import `https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset3.txt` into R. Watch out for the first few lines, missing values, separators, quotation marks, and deliminaters.
 
 ```{r}
-
+exercise1.3 <- read_csv(
+  "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset3.txt",
+  na = c("", "NA", "N/A"),  # Specify additional strings to be treated as NA
+  quote = "\"",             # Specify the quotation mark used in the file
+)
+exercise1.3
 ```
 
 
