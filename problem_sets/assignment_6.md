@@ -40,6 +40,21 @@ data_with_tribble
     1     1   2.1 apple 
     2     2   3.2 orange
 
+``` r
+data_with_tibble <- tibble(
+  a = c(1, 2),
+  b = c(2.1, 3.2),
+  c = c("apple", "orange")
+)
+data_with_tibble
+```
+
+    # A tibble: 2 × 3
+          a     b c     
+      <dbl> <dbl> <chr> 
+    1     1   2.1 apple 
+    2     2   3.2 orange
+
 <br>
 
 #### 1.2 Import `https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset2.txt` into R. Change the column names into “Name”, “Weight”, “Price”.
@@ -47,7 +62,7 @@ data_with_tribble
 ``` r
 exercise1.2 <- read_table(
   "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset2.txt",
-  col_names = c("Name", "Weight", "Price")  # Assign clear column names
+  col_names = c("Name", "Weight", "Price")
 )
 ```
 
@@ -80,6 +95,41 @@ exercise1.2
 
 #### 1.3 Import `https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset3.txt` into R. Watch out for the first few lines, missing values, separators, quotation marks, and deliminaters.
 
+``` r
+exercise1.3 <- read_delim(
+  "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset3.txt",
+  delim = ";",
+  na = c("", "NA", "N/A"),
+  quote = "\""
+)
+```
+
+    Warning: One or more parsing issues, call `problems()` on your data frame for details,
+    e.g.:
+      dat <- vroom(...)
+      problems(dat)
+
+    Rows: 5 Columns: 1
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ";"
+    chr (1): Table of fruits
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+exercise1.3
+```
+
+    # A tibble: 5 × 1
+      `Table of fruits`       
+      <chr>                   
+    1 09/25/18                
+    2 /Name/;/Weight/;/Price/ 
+    3 /apple/;1;2.9           
+    4 /orange/;2;Not Available
+    5 /durian/;?;19.9         
+
 <br>
 
 ## Exercise 2. Weather station
@@ -98,51 +148,33 @@ Protection Administration, Executive Yuan, R.O.C. (Taiwan).
   `kable()`.
 
 ``` r
-weather_notes <- read_table(
-  "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station_notes.txt",
-  col_names = c("Variable", "Description")  # Assign clear column names
+weather_variable_descriptions <- read_lines(
+  "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station_notes.txt"
 )
+weather_variable_descriptions_df <- tibble(
+  Variable = weather_variable_descriptions
+)
+kable(weather_variable_descriptions_df)
 ```
 
-
-    ── Column specification ────────────────────────────────────────────────────────
-    cols(
-      Variable = col_character(),
-      Description = col_character()
-    )
-
-    Warning: 10 parsing failures.
-    row col  expected     actual                                                                                                              file
-      1  -- 2 columns 1 columns  'https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station_notes.txt'
-      2  -- 2 columns 3 columns  'https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station_notes.txt'
-      7  -- 2 columns 1 columns  'https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station_notes.txt'
-      8  -- 2 columns 10 columns 'https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station_notes.txt'
-      9  -- 2 columns 10 columns 'https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station_notes.txt'
-    ... ... ......... .......... .................................................................................................................
-    See problems(...) for more details.
-
-``` r
-kable(weather_notes)
-```
-
-| Variable                 | Description |
-|:-------------------------|:------------|
-| Item-Unit-Description    | NA          |
-| AMB_TEMP-Celsius-Ambient | air         |
-| CO-ppm-Carbon            | monoxide    |
-| NO-ppb-Nitric            | oxide       |
-| NO2-ppb-Nitrogen         | dioxide     |
-| NOx-ppb-Nitrogen         | oxides      |
-| O3-ppb-Ozone             | NA          |
-| PM10-μg/m3-Particulate   | matter      |
-| PM2.5-μg/m3-Particulate  | matter      |
-| RAINFALL-mm-Rainfall     | NA          |
-| RH-%-Relative            | humidity    |
-| SO2-ppb-Sulfur           | dioxide     |
-| WD_HR-degress-Wind       | direction   |
-| WIND_DIREC-degress-Wind  | direction   |
-| WIND_SPEED-m/sec-Wind    | speed       |
-| WS_HR-m/sec-Wind         | speed       |
+| Variable |
+|:---|
+| Item-Unit-Description |
+| AMB_TEMP-Celsius-Ambient air temperature |
+| CO-ppm-Carbon monoxide |
+| NO-ppb-Nitric oxide |
+| NO2-ppb-Nitrogen dioxide |
+| NOx-ppb-Nitrogen oxides |
+| O3-ppb-Ozone |
+| PM10-μg/m3-Particulate matter with a diameter between 2.5 and 10 μm |
+| PM2.5-μg/m3-Particulate matter with a diameter of 2.5 μm or less |
+| RAINFALL-mm-Rainfall |
+| RH-%-Relative humidity |
+| SO2-ppb-Sulfur dioxide |
+| WD_HR-degress-Wind direction (The average of hour) |
+| WIND_DIREC-degress-Wind direction (The average of last ten minutes per hour) |
+| WIND_SPEED-m/sec-Wind speed (The average of last ten minutes per hour) |
+| WS_HR-m/sec-Wind speed (The average of hour) |
 
 <br>
 
@@ -167,6 +199,27 @@ kable(weather_notes)
 
 *Hints: you don’t have to perform these tasks in the given order; also,
 warning messages are not necessarily signs of trouble.*
+
+``` r
+weather_data <- read_csv(
+  "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station.csv"
+)
+```
+
+    Warning: One or more parsing issues, call `problems()` on your data frame for details,
+    e.g.:
+      dat <- vroom(...)
+      problems(dat)
+
+    Rows: 5460 Columns: 27
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    chr  (15): station, item, 04, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20
+    dbl  (11): 00, 01, 02, 03, 05, 06, 07, 19, 21, 22, 23
+    date  (1): date
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 <br>
 
@@ -199,8 +252,6 @@ After cleaning:
 <br>
 
 #### 2.3 Using this cleaned dataset, plot the daily variation in ambient temperature on September 25, 2015, as shown below.
-
-![](assignment_6_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 <br>
 

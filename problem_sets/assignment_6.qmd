@@ -22,8 +22,14 @@ data_with_tribble <- tribble(~a, ~b,   ~c, 1,  2.1, "apple", 2,  3.2, "orange")
 
 data_with_tribble
 ```
-
-
+```{r}
+data_with_tibble <- tibble(
+  a = c(1, 2),
+  b = c(2.1, 3.2),
+  c = c("apple", "orange")
+)
+data_with_tibble
+```
 
 <br>
 
@@ -31,7 +37,7 @@ data_with_tribble
 ```{r}
 exercise1.2 <- read_table(
   "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset2.txt",
-  col_names = c("Name", "Weight", "Price")  # Assign clear column names
+  col_names = c("Name", "Weight", "Price")
 )
 exercise1.2
 ```
@@ -42,10 +48,11 @@ exercise1.2
 #### 1.3 Import `https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset3.txt` into R. Watch out for the first few lines, missing values, separators, quotation marks, and deliminaters.
 
 ```{r}
-exercise1.3 <- read_csv(
+exercise1.3 <- read_delim(
   "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset3.txt",
-  na = c("", "NA", "N/A"),  # Specify additional strings to be treated as NA
-  quote = "\"",             # Specify the quotation mark used in the file
+  delim = ";",
+  na = c("", "NA", "N/A"),
+  quote = "\""
 )
 exercise1.3
 ```
@@ -68,12 +75,13 @@ Protection Administration, Executive Yuan, R.O.C. (Taiwan).
 - Import it into R and print it in a table as shown below with
   `kable()`.
 ```{r}
-weather_notes <- read_table(
-  "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station_notes.txt",
-  col_names = c("Variable", "Description")  # Assign clear column names
+weather_variable_descriptions <- read_lines(
+  "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station_notes.txt"
 )
-
-kable(weather_notes)
+weather_variable_descriptions_df <- tibble(
+  Variable = weather_variable_descriptions
+)
+kable(weather_variable_descriptions_df)
 ```
 
 
@@ -102,7 +110,9 @@ kable(weather_notes)
 warning messages are not necessarily signs of trouble.*
 
 ```{r}
-
+weather_data <- read_csv(
+  "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station.csv"
+)
 ```
 
 
@@ -138,7 +148,9 @@ After cleaning:
 
 #### 2.3 Using this cleaned dataset, plot the daily variation in ambient temperature on September 25, 2015, as shown below.
 
-![](assignment_6_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+```{r}
+
+```
 
 <br>
 
