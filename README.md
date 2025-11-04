@@ -35,3 +35,5 @@ Assignment 7: problem_sets/assignment_7.md
 Assignment 8: https://github.com/therkildsen-class/ntres-6100-assignments-lorenaps07/blob/7fc3218511208c990216de54bd108bf5d41c41fb/problem_sets/assignment_8.md
 
 Assignment 9: https://github.com/therkildsen-class/ntres-6100-assignments-lorenaps07/blob/26704fc115360a0e8832f3ad26621720cc0d6f8d/problem_sets/assignment_9.md
+
+Assignment 4: https://github.com/therkildsen-class/ntres-6100-assignments-lorenaps07/blob/ea579ba343d133fb20853f1754dd8c697af33e22/problem_sets/assignment_4.md
