@@ -1,0 +1,6 @@
+library(usethis)
+use_git_config(user.name = "lorenaps07", user.email = "lp455@cornell.edu")
+create_github_token()
+library(gitcreds)
+gitcreds_set()
+use_github()
