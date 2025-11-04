@@ -45,6 +45,8 @@ kable(head(economist_data))
 
 #### 1.2 Expore the relationship between human development index (`HDI`) and corruption perception index (`CPI`) with a scatter plot as the following.
 
+
+
 ```{r}
 plotrelationship <- economist_data %>%
   ggplot(aes(x = CPI, y = HDI)) +
