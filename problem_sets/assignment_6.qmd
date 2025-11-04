@@ -51,8 +51,8 @@ exercise1.2
 exercise1.3 <- read_delim(
   "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset3.txt",
   delim = ";",
-  na = c("", "NA", "N/A"),
-  quote = "\""
+  skip = 2,
+  na = c("NA", "N/A", "")
 )
 exercise1.3
 ```
@@ -110,9 +110,7 @@ kable(weather_variable_descriptions_df)
 warning messages are not necessarily signs of trouble.*
 
 ```{r}
-weather_data <- read_csv(
-  "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station.csv"
-)
+
 ```
 
 

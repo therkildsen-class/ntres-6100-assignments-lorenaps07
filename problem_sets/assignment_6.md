@@ -99,20 +99,15 @@ exercise1.2
 exercise1.3 <- read_delim(
   "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/dataset3.txt",
   delim = ";",
-  na = c("", "NA", "N/A"),
-  quote = "\""
+  skip = 2,
+  na = c("NA", "N/A", "")
 )
 ```
 
-    Warning: One or more parsing issues, call `problems()` on your data frame for details,
-    e.g.:
-      dat <- vroom(...)
-      problems(dat)
-
-    Rows: 5 Columns: 1
+    Rows: 3 Columns: 3
     ── Column specification ────────────────────────────────────────────────────────
     Delimiter: ";"
-    chr (1): Table of fruits
+    chr (3): /Name/, /Weight/, /Price/
 
     ℹ Use `spec()` to retrieve the full column specification for this data.
     ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -121,14 +116,12 @@ exercise1.3 <- read_delim(
 exercise1.3
 ```
 
-    # A tibble: 5 × 1
-      `Table of fruits`       
-      <chr>                   
-    1 09/25/18                
-    2 /Name/;/Weight/;/Price/ 
-    3 /apple/;1;2.9           
-    4 /orange/;2;Not Available
-    5 /durian/;?;19.9         
+    # A tibble: 3 × 3
+      `/Name/` `/Weight/` `/Price/`    
+      <chr>    <chr>      <chr>        
+    1 /apple/  1          2.9          
+    2 /orange/ 2          Not Available
+    3 /durian/ ?          19.9         
 
 <br>
 
@@ -199,27 +192,6 @@ kable(weather_variable_descriptions_df)
 
 *Hints: you don’t have to perform these tasks in the given order; also,
 warning messages are not necessarily signs of trouble.*
-
-``` r
-weather_data <- read_csv(
-  "https://raw.githubusercontent.com/nt246/NTRES-6100-data-science/master/datasets/2015y_Weather_Station.csv"
-)
-```
-
-    Warning: One or more parsing issues, call `problems()` on your data frame for details,
-    e.g.:
-      dat <- vroom(...)
-      problems(dat)
-
-    Rows: 5460 Columns: 27
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ","
-    chr  (15): station, item, 04, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20
-    dbl  (11): 00, 01, 02, 03, 05, 06, 07, 19, 21, 22, 23
-    date  (1): date
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 <br>
 
